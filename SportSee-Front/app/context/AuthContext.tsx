@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from "react";
+import type { ReactNode } from "react";
 
 type AuthContextType = {
   token: string | null;
@@ -9,7 +10,7 @@ type AuthContextType = {
 
 export const AuthContext = createContext<AuthContextType | null>(null);
 
-import type { ReactNode } from "react";
+
 
 type Props = {
   children: ReactNode;
@@ -28,10 +29,6 @@ export function AuthProvider({ children }: Props) {
 
   const isAuthenticated = !!token;
   const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setLoading(false);
-  }, []);
 
   return (
     <AuthContext.Provider value={{ token, userId, isAuthenticated, loading }}>

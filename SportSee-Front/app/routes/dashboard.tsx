@@ -1,7 +1,11 @@
+import "./dashboard.css";
 import { mockUsers, mockActivities } from "../data/mockData";
 import { useContext } from "react";
 import { Navigate } from "react-router";
 import { AuthContext } from "../context/AuthContext";
+import BPMcharts from '../components/charts/BPMcharts';
+import DistanceCharts from "../components/charts/DistanceCharts";
+import ObjectifsCharts from "../components/charts/ObjectifsCharts";
 
 export function meta() {
   return [
@@ -13,7 +17,8 @@ export function meta() {
 
 export default function Dashboard() {
   const authContext = useContext(AuthContext);
-
+console.log('loading:', authContext?.loading);
+console.log('isAuthenticated:', authContext?.isAuthenticated);
   if (authContext?.loading) {
     return <p>Chargement...</p>;
   }
@@ -29,9 +34,20 @@ export default function Dashboard() {
 
   return (
     <main>
-      <h1>Bonjour {user.firstName}</h1>
-      <p>Objectif hebdomadaire : {user.weeklyGoal}</p>
+      <img src ={user.profilePicture} alt={`${user.firstName} ${user.lastName}`} />
+      <h1> {user.firstName}</h1>
+      <p>Membre depuis {user.memberSince}</p>
+      <p>Distance totale : {user.totalDistance} km</p>
+      
+      <h1>Vos dernières performances</h1>
+      <DistanceCharts />
+      <BPMcharts />
+      
 
+     
+
+      <p>Objectif hebdomadaire : {user.weeklyGoal}</p>
+       <ObjectifsCharts />
       <h2>Activités</h2>
 
       <ul>

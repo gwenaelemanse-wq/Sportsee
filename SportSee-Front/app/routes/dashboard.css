@@ -1,0 +1,15 @@
+.dashboard h1 {
+ font-family: Inter;
+font-weight: 500;
+font-style: Medium;
+font-size: 22px;
+
+line-height: 100%;
+letter-spacing: 0px;
+}
+
+.dashboard img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
