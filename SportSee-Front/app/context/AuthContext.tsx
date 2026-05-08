@@ -6,6 +6,8 @@ type AuthContextType = {
   userId: string | null;
   isAuthenticated: boolean;
   loading: boolean;
+  login: (token: string, userId: string) => void;
+  logout: () => void;
 };
 
 export const AuthContext = createContext<AuthContextType | null>(null);
@@ -30,8 +32,22 @@ export function AuthProvider({ children }: Props) {
   const isAuthenticated = !!token;
   const [loading, setLoading] = useState(true);
 
+  const login = (token: string, userId: string) => {
+    setToken(token);
+    setUserId(userId);
+    localStorage.setItem("token", token);
+    localStorage.setItem("userId", userId);
+  };
+
+  const logout = () => {
+    setToken(null);
+    setUserId(null);
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+  };
+
   return (
-    <AuthContext.Provider value={{ token, userId, isAuthenticated, loading }}>
+    <AuthContext.Provider value={{ token, userId, isAuthenticated, loading, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
