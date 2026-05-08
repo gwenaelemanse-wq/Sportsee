@@ -3,7 +3,7 @@ import { mockUsers, mockActivities } from "../data/mockData";
 import { useContext } from "react";
 import { Navigate } from "react-router";
 import { AuthContext } from "../context/AuthContext";
-import BPMcharts from '../components/charts/BPMcharts';
+import BPMcharts from "../components/charts/BPMcharts";
 import DistanceCharts from "../components/charts/DistanceCharts";
 import ObjectifsCharts from "../components/charts/ObjectifsCharts";
 
@@ -17,11 +17,11 @@ export function meta() {
 
 export default function Dashboard() {
   const authContext = useContext(AuthContext);
-console.log('loading:', authContext?.loading);
-console.log('isAuthenticated:', authContext?.isAuthenticated);
+
   if (authContext?.loading) {
     return <p>Chargement...</p>;
   }
+
   if (!authContext?.isAuthenticated) {
     return <Navigate to="/" replace />;
   }
@@ -33,30 +33,53 @@ console.log('isAuthenticated:', authContext?.isAuthenticated);
   );
 
   return (
-    <main>
-      <img src ={user.profilePicture} alt={`${user.firstName} ${user.lastName}`} />
-      <h1> {user.firstName}</h1>
-      <p>Membre depuis {user.memberSince}</p>
-      <p>Distance totale : {user.totalDistance} km</p>
-      
-      <h1>Vos dernières performances</h1>
-      <DistanceCharts />
-      <BPMcharts />
-      
+    <main className="dashboard">
+      <section className="dashboard-header">
+        <img
+          className="dashboard-profile-image"
+          src={user.profilePicture}
+          alt={`${user.firstName} ${user.lastName}`}
+        />
 
-     
+        <div className="dashboard-user-info">
+          <h1 className="dashboard-user-name">{user.firstName}</h1>
+          <p className="dashboard-user-text">Membre depuis {user.memberSince}</p>
+          <p className="dashboard-user-text">
+            Distance totale : {user.totalDistance} km
+          </p>
+        </div>
+      </section>
 
-      <p>Objectif hebdomadaire : {user.weeklyGoal}</p>
-       <ObjectifsCharts />
-      <h2>Activités</h2>
+      <section className="dashboard-section">
+        <h2 className="dashboard-section-title">Vos dernières performances</h2>
 
-      <ul>
-        {userActivity?.runningData.map((session: any, index: number) => (
-          <li key={index}>
-            {session.date} - {session.distance} km - {session.duration} min
-          </li>
-        ))}
-      </ul>
+        <div className="dashboard-charts-grid">
+          <DistanceCharts />
+          <BPMcharts />
+        </div>
+      </section>
+
+      <section className="dashboard-section">
+        <p className="dashboard-goal">
+          Objectif hebdomadaire : {user.weeklyGoal}
+        </p>
+
+        <div className="dashboard-bottom-grid">
+          <ObjectifsCharts />
+
+          <div className="dashboard-activities">
+            <h2 className="dashboard-section-title">Activités</h2>
+
+            <ul className="dashboard-activities-list">
+              {userActivity?.runningData.map((session: any, index: number) => (
+                <li key={index} className="dashboard-activity-item">
+                  {session.date} - {session.distance} km - {session.duration} min
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }
