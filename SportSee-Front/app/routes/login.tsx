@@ -10,6 +10,7 @@ export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -26,27 +27,32 @@ export default function Login() {
       });
 
       const data = await response.json();
-      console.log(data);
+
 
       localStorage.setItem("token", data.token);
       localStorage.setItem("userId", data.userId);
       window.location.href = "/dashboard";
 
-      console.log("Token stocké :", data.token);
-    } catch (error) {
-      console.error("Erreur de connexion :", error);
-    }
-  }
+   } catch (error) {
+    console.error("Erreur de connexion :", error);
+  };
+}
 
   return (
+    <>
+    
+
     <main className="login-container">
       <div className="login-left">
+        <div className="logo-container">
+      <img src="/public/images/logo1.png" alt="Logo SportSee" />
+    </div>
         <div className="login-form">
           <h2>Transformez vos stats en résultat</h2>
           <h1>Se connecter</h1>
 
           <form onSubmit={handleSubmit}>
-            <label htmlFor="username">Email</label>
+            <label htmlFor="username">Adresse Email</label>
             <input
               id="username"
               type="text"
@@ -71,5 +77,6 @@ export default function Login() {
 
       <div className="login-right"></div>
     </main>
+    </>
   );
 }

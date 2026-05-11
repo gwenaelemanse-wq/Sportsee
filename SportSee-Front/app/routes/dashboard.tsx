@@ -6,6 +6,7 @@ import { AuthContext } from "../context/AuthContext";
 import BPMcharts from "../components/charts/BPMcharts";
 import DistanceCharts from "../components/charts/DistanceCharts";
 import ObjectifsCharts from "../components/charts/ObjectifsCharts";
+import StatCard from "../components/StatCard";
 
 export function meta() {
   return [
@@ -66,20 +67,25 @@ export default function Dashboard() {
 
         <div className="dashboard-bottom-grid">
           <ObjectifsCharts />
-
-          <div className="dashboard-activities">
-            <h2 className="dashboard-section-title">Activités</h2>
-
-            <ul className="dashboard-activities-list">
-              {userActivity?.runningData.map((session: any, index: number) => (
-                <li key={index} className="dashboard-activity-item">
-                  {session.date} - {session.distance} km - {session.duration} min
-                </li>
-              ))}
-            </ul>
+          <div className="dashboard-stats">
+            <StatCard
+              title="Durée d'activité"
+              value="140"
+              unit="minutes"
+              color="blue"
+            />
+          <StatCard
+              title="Distance"
+              value="21.7"
+              unit="kilomètres"
+              color="orange"
+            />
           </div>
-        </div>
+         </div>
+       
       </section>
+
+     
     </main>
   );
 }
