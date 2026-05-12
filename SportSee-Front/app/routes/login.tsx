@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import "./login.css";
+import Logo from "../images/logo1.png";
+import Photo from "../images/Background-login.png";
 
 export function meta() {
   return [{ title: "Connexion - SportSee" }];
@@ -45,7 +47,7 @@ export default function Login() {
     <main className="login-container">
       <div className="login-left">
         <div className="logo-container">
-      <img src="/public/images/logo1.png" alt="Logo SportSee" />
+      <img src={Logo} alt="Logo SportSee" />
     </div>
         <div className="login-form">
           <h2>Transformez vos stats en résultat</h2>
@@ -75,7 +77,9 @@ export default function Login() {
         </div>
       </div>
 
-      <div className="login-right"></div>
+      <div className="login-right">
+        <img src={Photo} alt="Background" />
+      </div>
     </main>
     </>
   );

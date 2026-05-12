@@ -1,0 +1,18 @@
+.stat-card-profil {
+  background-color: blue;
+  border-radius: 16px;
+  padding: 24px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.stat-card-profil h3 {
+  font-size: 14px;
+  color: white;
+}
+
+.stat-card-profil p {
+  font-size: 32px;
+  font-weight: bold;
+  color: white;
+}
