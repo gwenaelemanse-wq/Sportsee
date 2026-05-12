@@ -1,69 +1,110 @@
-.profile-container {
+.profile-page {
   max-width: 1200px;
   margin: 0 auto;
   padding: 32px;
-  background-color: #f5f6ff;
   min-height: 100vh;
+  background: #f6f7ff;
   box-sizing: border-box;
 }
 
-.profile-header {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  margin-bottom: 40px;
-}
-.profile-image {
-  width: 120px;
-  height: 120px;
-  border-radius: 20px;
-  object-fit: cover;
-  display: block;
+.profile-grid {
+  display: grid;
+  grid-template-columns: minmax(320px, 420px) 1fr;
+  gap: 40px;
+  align-items: start;
 }
 
-.profile-user-info {
+.profile-left-column {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 20px;
 }
 
-.profile-user-name {
+.profile-card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.profile-header-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 16px;
+  object-fit: cover;
+}
+
+.profile-name {
+  margin: 0 0 6px 0;
+  font-size: 2rem;
+}
+
+.profile-member-since {
   margin: 0;
-  font-size: 32px;
-  font-weight: 700;
+  color: #7a7a7a;
 }
 
-.profile-user-text {
-  margin: 0;
-  font-size: 16px;
-}
-
-.profile-section {
-  margin-bottom: 40px;
+.profile-info-card {
+  min-height: 260px;
 }
 
 .profile-section-title {
-  margin: 0 0 20px 0;
-  font-size: 24px;
-  font-weight: 700;
+  margin: 0;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #ececec;
+  font-size: 1.8rem;
 }
 
+.profile-info-list {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  color: #5f5f5f;
+}
 
-.profile-goal {
-  margin: 0 0 20px 0;
-  font-size: 18px;
-  font-weight: 600;
+.profile-right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.profile-stats-title {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.profile-stats-date {
+  margin: 4px 0 0 0;
+  color: #7a7a7a;
 }
 
 .profile-stats-grid {
   display: grid;
-  grid-template-columns: minmax(280px, 420px) 1fr;
-  gap: 24px;
+  grid-template-columns: repeat(2, minmax(220px, 1fr));
+  gap: 18px;
   align-items: start;
 }
 
-.profile-stats {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+.profile-stats-grid > :last-child {
+  max-width: 220px;
+}
+
+@media (max-width: 900px) {
+  .profile-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-stats-grid > :last-child {
+    max-width: 100%;
+  }
 }

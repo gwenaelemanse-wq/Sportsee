@@ -1,53 +1,31 @@
 import { createContext, useEffect, useState } from "react";
-import type { ReactNode } from "react";
+import { getToken, logoutUser } from "../services/authService";
 
 type AuthContextType = {
-  token: string | null;
-  userId: string | null;
   isAuthenticated: boolean;
   loading: boolean;
-  login: (token: string, userId: string) => void;
   logout: () => void;
 };
 
 export const AuthContext = createContext<AuthContextType | null>(null);
 
-
-
-type Props = {
-  children: ReactNode;
-};
-
-export function AuthProvider({ children }: Props) {
-  const [token, setToken] = useState<string | null>(null);
-
-  const [userId, setUserId] = useState<string | null>(null);
+export function AuthProvider({ children }: { children: React.ReactNode }) {
+  const [loading, setLoading] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    setToken(localStorage.getItem("token"));
-    setUserId(localStorage.getItem("userId"));
+    const token = getToken();
+    setIsAuthenticated(!!token);
     setLoading(false);
   }, []);
 
-  const isAuthenticated = !!token;
-  const [loading, setLoading] = useState(true);
-
-  const login = (token: string, userId: string) => {
-    setToken(token);
-    setUserId(userId);
-    localStorage.setItem("token", token);
-    localStorage.setItem("userId", userId);
-  };
-
-  const logout = () => {
-    setToken(null);
-    setUserId(null);
-    localStorage.removeItem("token");
-    localStorage.removeItem("userId");
-  };
+  function logout() {
+    logoutUser();
+    setIsAuthenticated(false);
+  }
 
   return (
-    <AuthContext.Provider value={{ token, userId, isAuthenticated, loading, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, loading, logout }}>
       {children}
     </AuthContext.Provider>
   );
