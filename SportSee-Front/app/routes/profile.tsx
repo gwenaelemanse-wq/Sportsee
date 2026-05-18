@@ -59,13 +59,14 @@ export default function Profile() {
 
   const {
     data: activity,
-    loading: activityLoading,
+   loading: activityLoading,
     error: activityError,
   } = useApi<UserActivity>(fetchActivity);
 
-  if (authContext?.loading || userLoading || activityLoading) {
-    return <p>Chargement...</p>;
-  }
+ if (userLoading || activityLoading) {
+  return <p>Chargement des données...</p>;
+}
+
 
   if (!authContext?.isAuthenticated) {
     return <Navigate to="/" replace />;
@@ -106,13 +107,16 @@ export default function Profile() {
       <div className="profile-grid">
         <div className="profile-left-column">
           <section className="profile-card profile-header-card">
-            {imageSrc && (
-              <img
-                className="profile-avatar"
-                src={imageSrc}
-                alt={`${userInfo.profile.firstName} ${userInfo.profile.lastName}`}
-              />
-            )}
+              {imageSrc && (
+    <div className="profile-avatar-wrapper">
+      <img
+        className="profile-avatar"
+        src={imageSrc}
+        alt={`${userInfo.profile.firstName} ${userInfo.profile.lastName}`}
+      />
+    </div>
+  )}
+
 
             <div>
               <h1 className="profile-name">

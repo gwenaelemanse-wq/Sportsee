@@ -3,7 +3,27 @@
   border-radius: 16px;
   padding: 20px;
   width: 100%;
+
  
+}
+
+.bpm-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.bpm-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.chart-navigation {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .bpm-card__value {

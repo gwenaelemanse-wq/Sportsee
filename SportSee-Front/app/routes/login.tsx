@@ -13,31 +13,35 @@ export default function Login() {
   const [password, setPassword] = useState("");
 
 
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  event.preventDefault();
 
-    try {
-      const response = await fetch("http://localhost:8000/api/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: username,
-          password: password,
-        }),
-      });
+  try {
+    const response = await fetch("http://localhost:8000/api/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: username,
+        password: password,
+      }),
+    });
 
-      const data = await response.json();
+    const data = await response.json();
 
+    if (!response.ok || !data.token || !data.userId) {
+      console.error("Identifiants incorrects");
+      return;
+    }
 
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("userId", data.userId);
-      window.location.href = "/dashboard";
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("userId", data.userId);
 
-   } catch (error) {
+    window.location.href = "/dashboard";
+  } catch (error) {
     console.error("Erreur de connexion :", error);
-  };
+  }
 }
 
   return (

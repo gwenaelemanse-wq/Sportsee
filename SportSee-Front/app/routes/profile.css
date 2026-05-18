@@ -33,10 +33,24 @@
 }
 
 .profile-avatar {
-  width: 80px;
-  height: 80px;
-  border-radius: 16px;
+  width: 104px;
+  height: 117px;
+  border-radius: 10px;
   object-fit: cover;
+      transition: transform 0.3s ease;
+}
+
+
+  
+
+
+.profile-avatar-wrapper {
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.profile-avatar:hover {
+  transform: scale(1.5);
 }
 
 .profile-name {

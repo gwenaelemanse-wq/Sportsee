@@ -8,6 +8,8 @@ import BPMcharts from "../components/charts/BPMcharts";
 import DistanceCharts from "../components/charts/DistanceCharts";
 import ObjectifsCharts from "../components/charts/ObjectifsCharts";
 import StatCard from "../components/StatCard";
+import StatCardProfil from "../components/StatCardProfil";
+import Logo from "../images/OUTLINE.png";
 
 type UserInfo = {
   profile: {
@@ -103,27 +105,35 @@ const imageSrc = userInfo.profile.profilePicture || "";
   return (
     <main className="dashboard">
       <section className="dashboard-header">
-        {imageSrc && (
-          <img
-            className="dashboard-profile-image"
-            src={imageSrc}
-            alt={`${userInfo.profile.firstName} ${userInfo.profile.lastName}`}
-          />
-        )}
+  {imageSrc && (
+    <div className="dashboard-profile-image-wrapper">
+      <img
+        className="dashboard-profile-image"
+        src={imageSrc}
+        alt={`${userInfo.profile.firstName} ${userInfo.profile.lastName}`}
+      />
+    </div>
+  )}
 
-        <div className="dashboard-user-info">
-          <h1 className="dashboard-user-name">
-            {userInfo.profile.firstName}
-          </h1>
+       <div className="dashboard-user-info">
+  <div className="dashboard-user-identity">
+    <h1 className="dashboard-user-name">
+      {userInfo.profile.firstName} {userInfo.profile.lastName}
+    </h1>
 
-          <p className="dashboard-user-text">
-            Membre depuis {userInfo.profile.createdAt}
-          </p>
+    <p className="dashboard-user-text">
+      Membre depuis {userInfo.profile.createdAt}
+    </p>
+  </div>
 
-          <p className="dashboard-user-text">
-            Distance totale : {totalDistance.toFixed(1)} km
-          </p>
-        </div>
+  <div className="dashboard-user-stats">
+    <StatCardProfil
+      title=""
+      value={<><img src={Logo} alt="Logo"></img>{totalDistance.toFixed(1)}</>}
+      unit="km"
+    />
+  </div>
+</div>
       </section>
 
       <section className="dashboard-section">

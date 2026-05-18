@@ -1,8 +1,9 @@
+import type { JSX } from "react/jsx-dev-runtime"
 import "./style.css"
 
 type StatCardProfilProps = {
     title: string
-    value: string | number
+    value: string | number | JSX.Element
     unit?: string
     color?: string
 }

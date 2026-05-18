@@ -23,6 +23,11 @@ type ActivitySession = {
   duration: number;
   caloriesBurned: number;
   distance: number;
+  heartRate: {
+    min: number;
+    max: number;
+    average: number;
+  };
 };
 
 export function getUserInfo(): Promise<UserInfoResponse> {
